@@ -17,6 +17,9 @@
 
 /* External Includes */
 #include <stdarg.h>
+#include <stdint.h>
+#include <string.h>
+
 /* Internal Includes */
 #include "MQTTPacket/MQTTPacket.h"
 
@@ -348,10 +351,13 @@ public:
 			virtual const char* onAllocateTopic(const char *topic, int storageIdx) {
 				// Keep provided pointer
 				return topic;
+				(void) storageIdx;
 			}
 
 			virtual void onDeAllocateTopic(const char *topic, int storageIdx) {
 				// Nothing to do
+				(void) topic;
+				(void) storageIdx;
 			}
 
 		private:
@@ -815,7 +821,7 @@ private:
 
 	struct Session {
 		bool											isConnected = false;
-		unsigned int									keepAliveTmSec = 0;;
+		unsigned int									keepAliveTmSec = 0;
 		Timer											lastSentTimer;
 		Timer											lastRecvTimer;
 		bool											keepaliveSent = false;
